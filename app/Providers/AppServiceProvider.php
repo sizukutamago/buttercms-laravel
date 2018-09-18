@@ -23,6 +23,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        if(env('APP_ENV') === 'production'){
+            // asset()やurl()がhttpsで生成される
+            URL::forceScheme('https');
+        }
     }
 }
