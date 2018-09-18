@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>Laravel</title>
 
@@ -76,9 +77,9 @@
                 </div>
             @endif
 
-            <div class="content">
+            <div class="content" id="app">
                 <div class="title m-b-md">
-                    Laravel
+                    <example-component api-key="{{ env('BUTTERCMS_KEY') }}"></example-component>
                 </div>
 
                 <div class="links">
@@ -91,5 +92,6 @@
                 </div>
             </div>
         </div>
+        <script src="{{asset('js/app.js')}}"></script>
     </body>
 </html>
