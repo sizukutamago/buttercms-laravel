@@ -8,14 +8,24 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+import VueRouter from 'vue-router';
+import Butter from 'buttercms';
 
+window.butter = Butter($('meta[name="cms-token"]').attr('content'));
+Vue.use(VueRouter);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
+import PostListComponent from './components/PostListComponent.vue';
+import PostComponent from './components/PostComponent.vue';
+
+const routes = [
+    {path: '/', component: PostListComponent},
+    {path: '/:id', component: PostComponent, name: 'post'}
+];
 
 $.ajaxSetup({
     headers: {
@@ -24,5 +34,6 @@ $.ajaxSetup({
 });
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    router: new VueRouter({mode: 'history', routes: routes})
 });
